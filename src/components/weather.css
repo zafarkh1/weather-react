@@ -13,6 +13,7 @@ body {
 }
 
 .container {
+	width: 1400px;
   padding: 3rem 5rem;
   color: #f3f6fd;
 }

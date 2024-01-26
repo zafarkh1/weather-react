@@ -27,6 +27,7 @@ const Weather = () => {
         const data = await response.json();
         setWeather(data);
         setError(null);
+				inputValue.current.value = ''
       } catch (error) {
         console.error(error);
         setWeather("");
