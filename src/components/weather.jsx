@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./weather.css";
 
-import { IoMdSearch } from "react-icons/io";
 // REACT_APP_ICON_URL = 'https://openweathermap.org/img/w'
 const API_KEY = "609263fe9c110026c99f5e8dc3d6ec68";
 const API_URL = "https://api.openweathermap.org/data/2.5";
@@ -48,44 +47,34 @@ const Weather = () => {
             type="text"
             className="cityInput"
             ref={inputValue}
-            placeholder="Enter a location"
+            placeholder="Enter Location"
           />
-          <div
-            className="search-icon"
-            onClick={(e) => {
-              search(e);
-            }}
-          >
-            <IoMdSearch />
-          </div>
         </form>
-        {!weather ? (
-          error ? (
-            <h1>{error}</h1>
-          ) : (
-            <h1>No data found</h1>
-          )
-        ) : (
+        {weather ? (
           <div className="container">
-            <p>
-              Temperature:{" "}
-              {weather.main ? <bold>{weather.main.temp}</bold> : null} °C
-            </p>
-            <p>City: {weather.name ? <bold>{weather.name}</bold> : null}</p>
-            <p>
-              Description:{" "}
-              {weather.weather ? <bold>{weather.weather[0].main}</bold> : null}
-            </p>
-            <p>
-              Humidity:{" "}
-              {weather.main ? <bold>{weather.main.humidity}</bold> : null} %
-            </p>
-            <p>
-              Wind Speed:{" "}
-              {weather.wind ? <bold>{weather.wind.speed}</bold> : null} km/h
-            </p>
+            <div className="main">
+              <h4 className="city">{weather.name}</h4>
+              <h1 className="temperature">{weather.main.temp.toFixed(1)} °C</h1>
+              <p className="desc">{weather.weather[0].main}</p>
+            </div>
+            <div className="footer">
+              <div className="pressure">
+                <p>{weather.main.pressure} Pa</p>
+                <span>Pressure</span>
+              </div>
+              <div className="humidity">
+                <p>{weather.main.humidity} %</p>
+                <span>Humidity</span>
+              </div>
+              <div className="windSpeed">
+                <p>{weather.wind.speed} km/h</p>
+                <span>Wind Speed</span>
+              </div>
+            </div>
           </div>
-        )}
+        ) : error ? (
+          <h1>{error}</h1>
+        ) : null}
       </div>
     </>
   );
